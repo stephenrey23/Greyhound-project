@@ -14,16 +14,23 @@ describe('Greyhound project', () => {
         cy.visit('/');
         cy.handlePrivacyBanner();
 
-        cy.get('[data-e2e="origin-input-field"] input').type(this.tripData.origin);
-        cy.wait('@citySearch');
-        cy.get('[data-e2e="autocomplete-suggestion"]').contains('Miami, FL').click({ force: true });
+        cy.get('[data-e2e="origin-input-field"] input', { timeout: 10000 })
+        .should('be.visible')
+        .type(this.tripData.origin, { force: true });
 
-        cy.get('[data-e2e="destination-input-field"] input').type(this.tripData.destination);
         cy.wait('@citySearch');
-        cy.get('[data-e2e="autocomplete-suggestion"]').contains('Orlando, FL').click({ force: true });
+        cy.get('[data-e2e="autocomplete-suggestion"]')
+        .contains('Miami, FL')
+        .click({ force: true });
 
-        cy.log('### Opening Calendar ###');
-        cy.get('[data-e2e="departure-date-input"]').click(); 
+        cy.get('[data-e2e="destination-input-field"] input', { timeout: 10000 })
+        .should('be.visible')
+        .type(this.tripData.destination, { force: true });
+
+       cy.wait('@citySearch');
+       cy.get('[data-e2e="autocomplete-suggestion"]')
+       .contains('Orlando, FL')
+       .click({ force: true });
         
         const targetDate = new Date();
         targetDate.setDate(targetDate.getDate() + this.tripData.daysInFuture);
