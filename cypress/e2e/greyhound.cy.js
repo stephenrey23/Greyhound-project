@@ -18,31 +18,30 @@ describe('Greyhound project', () => {
         });
         cy.handlePrivacyBanner();
 
-       / 1. Manejar el Origen
-cy.get('[data-e2e="origin-input-field"]', { timeout: 15000 })
-  .should('be.visible')
-  .click({ force: true }); 
+        cy.get('[data-e2e="origin-input-field"]', { timeout: 15000 })
+        .should('be.visible')
+        .click({ force: true }); 
 
-cy.get('[data-e2e="origin-input-field"] input')
-  .clear({ force: true }) 
-  .type(this.tripData.origin, { force: true, delay: 100 }); 
+        cy.get('[data-e2e="origin-input-field"] input')
+        .clear({ force: true }) 
+        .type(this.tripData.origin, { force: true, delay: 100 }); 
 
-cy.wait('@citySearch');
-cy.get('[data-e2e="autocomplete-suggestion"]')
-  .contains('Miami, FL')
-  .click({ force: true });
+        cy.wait('@citySearch');
+        cy.get('[data-e2e="autocomplete-suggestion"]')
+        .contains('Miami, FL')
+        .click({ force: true });
 
-cy.get('[data-e2e="destination-input-field"]')
-  .click({ force: true });
+        cy.get('[data-e2e="destination-input-field"]')
+        .click({ force: true });
 
-cy.get('[data-e2e="destination-input-field"] input')
-  .clear({ force: true })
-  .type(this.tripData.destination, { force: true, delay: 100 });
+        cy.get('[data-e2e="destination-input-field"] input')
+        .clear({ force: true })
+        .type(this.tripData.destination, { force: true, delay: 100 });
 
-cy.wait('@citySearch');
-cy.get('[data-e2e="autocomplete-suggestion"]')
-  .contains('Orlando, FL')
-  .click({ force: true });
+        cy.wait('@citySearch');
+        cy.get('[data-e2e="autocomplete-suggestion"]')
+        .contains('Orlando, FL')
+        .click({ force: true });
         
         const targetDate = new Date();
         targetDate.setDate(targetDate.getDate() + this.tripData.daysInFuture);
