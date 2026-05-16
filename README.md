@@ -1,53 +1,21 @@
-Greyhound Booking Automation Project
-Project Overview
-This project is an End-to-End (E2E) automation framework designed to validate the booking flow on the Greyhound official website. It focuses on stability, network efficiency, and professional testing patterns using Cypress.
+# Greyhound.com - Advanced Automation & Network Interception Case Study
 
-Key Technical Features
-1. Network Interception and API Mocking
-The framework utilizes cy.intercept to manage asynchronous behavior and external dependencies:
+## 📌 Project Overview
+This project targets a highly dynamic, live enterprise production environment (Greyhound.com). The goal was to build an automated workflow utilizing Cypress and JavaScript to handle asynchronous elements, complex DOM structures, and live network requests.
 
-City Search: Monitors GET requests to the FlixBus autocomplete API to ensure the application only interacts with the UI once the backend data is ready.
+## 🛠️ Technical Challenges & Engineering Insights
+Working on a live production site presents real-world constraints that you don't encounter in sandbox testing environments. 
 
-Payment Mocking: To allow full flow execution without a real credit card, the project intercepts the POST request to the payment gateway, returning a simulated 200 OK success response.
+### 1. Dynamic Element Handling
+The platform relies heavily on dynamic element rendering and complex session states. I implemented strategic wait strategies and conditional assertions to bypass traditional automation flakiness.
 
-2. Robust Selector Strategy
-Following industry best practices, the framework prioritizes selection through dedicated testing attributes:
+### 2. Network Interception (`cy.intercept()`)
+To handle live search results and flight/bus schedule matrices, the suite leverages advanced network interception to monitor internal API responses, ensuring data consistency before executing UI interactions.
 
-data-e2e: Used for critical actions like the search button.
+## 🧠 Key Takeaways
+While automating live public sites poses strict boundary limitations (such as aggressive firewalls and rate-limiting anti-bot measures), this project served as an invaluable deep-dive into:
+- Advanced asynchronous behavior in Cypress.
+- Inspecting network payloads and handling API intercepts.
+- Debugging complex, nested DOM trees under production constraints.
 
-data-testid: Used for passenger information and trip selection.
-
-This approach ensures the tests remain resilient to changes in CSS classes or dynamic IDs.
-
-3. Custom Commands
-Repetitive or complex logic has been abstracted into custom Cypress commands located in support/commands.js:
-
-handlePrivacyBanner: Manages the initial cookie/consent overlay.
-
-clickWithoutNewTab: Manipulates the DOM to prevent links from opening in secondary browser tabs, ensuring Cypress maintains control of the session.
-
-4. Data-Driven Testing
-Test parameters such as origin, destination, and travel dates are decoupled from the code and stored in JSON fixtures (fixtures/tripData.json), making the suite easily configurable.
-
-Project Structure
-cypress/e2e/: Contains the main test files.
-
-cypress/fixtures/: Stores static data for testing.
-
-cypress/support/: Includes custom commands and global configurations.
-
-Prerequisites
-Node.js (Latest stable version)
-
-Cypress
-
-Installation and Execution
-Clone the repository or download the source code.
-
-Install dependencies:
-npm install
-
-Open the Cypress Test Runner:
-npx cypress open
-
-Run the spec: greyhound.cy.js
+*Note: This repository is preserved as a technical case study demonstrating advanced troubleshooting, adaptation, and network-level testing logic.*
