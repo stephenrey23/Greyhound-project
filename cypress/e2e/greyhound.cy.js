@@ -56,7 +56,7 @@ describe('Greyhound project', () => {
         targetDate.setDate(targetDate.getDate() + this.tripData.daysInFuture);
         cy.contains('button', targetDate.getDate()).click({ force: true });
 
-        cy.log('### Executing Search ###');
+        cy.log('### Search###');
         cy.clickWithoutNewTab('[data-e2e="search-button"] button');
 
         cy.get('[data-e2e="results-list"]', { timeout: 25000 }).should('be.visible');
@@ -68,6 +68,6 @@ describe('Greyhound project', () => {
         cy.get('[data-e2e="payment-submit-button"]').click();
 
         cy.wait('@mockPayment');
-        cy.log('### MISSION ACCOMPLISHED ###');
+        cy.log('###MockPayment complete###);
     });
 });
